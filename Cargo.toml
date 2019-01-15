@@ -1,0 +1,12 @@
+[workspace]
+
+members = [
+    "cat",
+    "touch",
+    "head",
+    "tail",
+    "more",
+    "less",
+    "which",
+    "wc",
+]

@@ -1,0 +1,12 @@
+[package]
+name = "cat"
+version = "0.1.0-alpha"
+authors = ["StardustDL"]
+edition = "2018"
+
+[dependencies]
+
+[dependencies.clap]
+version = "^2.32.0"
+default-features = true
+features = [ "yaml" ]

@@ -1,0 +1,8 @@
+name: cat
+version: "0.1.0-alpha"
+author: StardustDL <stardustdl@163.com>
+about: Concatenate FILE(s) to standard output.
+args:
+    - FILE:
+        help: The file to concatenate. With no FILE, or when FILE is -, read standard input.
+        index: 1
