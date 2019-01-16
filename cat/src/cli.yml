@@ -6,3 +6,7 @@ args:
     - FILE:
         help: The file to concatenate. With no FILE, or when FILE is -, read standard input.
         index: 1
+    - number:
+        short: n
+        long: number
+        help: Number all output lines
