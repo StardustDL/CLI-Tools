@@ -10,3 +10,7 @@ args:
         short: n
         long: number
         help: Number all output lines
+    - number-nonblank:
+        short: b
+        long: number-nonblank
+        help: Number nonempty output lines, overrides -n
