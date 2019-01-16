@@ -14,3 +14,29 @@ args:
         short: b
         long: number-nonblank
         help: Number nonempty output lines, overrides -n
+    - show-ends:
+        short: E
+        long: show-ends
+        help: Display $ at end of each line
+    - show-tabs:
+        short: T
+        long: show-tabs
+        help: Display TAB characters as ^I
+    - show-nonprinting:
+        short: v
+        long: show-nonprinting
+        help: Use ^ and M- notation, except for LFD and TAB
+    - show-all:
+        short: A
+        long: show-all
+        help: Equivalent to -vET
+    - show-vE:
+        short: e
+        help: Equivalent to -vE
+    - show-vT:
+        short: t
+        help: Equivalent to -vT
+    - squeeze-blank:
+        short: s
+        long: squeeze-blank
+        help: Suppress repeated empty output lines

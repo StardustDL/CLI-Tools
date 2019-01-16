@@ -6,6 +6,10 @@ pub struct Config<'a> {
     pub file: Option<&'a str>,
     pub number: bool,
     pub number_nonblank: bool,
+    pub show_ends: bool,
+    pub show_tabs: bool,
+    pub show_nonprinting: bool,
+    pub squeeze_blank: bool,
 }
 
 impl<'a> Config<'a> {
@@ -13,10 +17,21 @@ impl<'a> Config<'a> {
         let file = args.value_of("FILE");
         let number = args.is_present("number");
         let number_nonblank = args.is_present("number-nonblank");
+        let show_all = args.is_present("show-all");
+        let show_ve = args.is_present("show-vE") | show_all;
+        let show_ends = args.is_present("show-ends") | show_ve;
+        let show_vt = args.is_present("show-vT") | show_all;
+        let show_tabs = args.is_present("show-tabs") | show_vt;
+        let show_nonprinting = args.is_present("show-nonprinting") | show_ve | show_vt;
+        let squeeze_blank = args.is_present("squeeze-blank");
         Config {
             file,
             number,
             number_nonblank,
+            show_ends,
+            show_tabs,
+            show_nonprinting,
+            squeeze_blank,
         }
     }
 }
@@ -29,14 +44,28 @@ pub fn run(config: Config) -> Result<()> {
 
     let reader = BufReader::new(file);
     let mut number_nonblank = 0;
+    let mut last_empty = false;
     for (number, line_raw) in reader.lines().enumerate() {
-        let line = line_raw?;
+        let mut line = line_raw?;
+        let is_empty = line.is_empty();
+        if is_empty && last_empty && config.squeeze_blank {
+            continue;
+        }
+        if config.show_tabs {
+            line = line.replace("\t", "^I");
+        }
+        if config.show_nonprinting {
+            line = line.replace("\r", "^M");
+        }
+        if config.show_ends {
+            line.push_str("$");
+        }
         match config {
             Config {
                 number_nonblank: true,
                 ..
             } => {
-                if line.is_empty() {
+                if is_empty {
                     println!("{:4}  {}", "", line);
                 } else {
                     number_nonblank += 1;
@@ -50,6 +79,7 @@ pub fn run(config: Config) -> Result<()> {
                 println!("{}", line);
             }
         }
+        last_empty = is_empty;
     }
 
     Ok(())
