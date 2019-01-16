@@ -1,11 +1,12 @@
 name: cat
-version: "0.1.0-alpha"
+version: "1.0.0"
 author: StardustDL <stardustdl@163.com>
 about: Concatenate FILE(s) to standard output.
+after_help: "EXAMPLES:\n    cat f - g  Output f's contents, then standard input, then g's contents.\n    cat        Copy standard input to standard output."
 args:
     - FILE:
+        multiple: true
         help: The file to concatenate. With no FILE, or when FILE is -, read standard input.
-        index: 1
     - number:
         short: n
         long: number
