@@ -1,0 +1,21 @@
+name: head
+version: "1.0.0"
+author: StardustDL <stardustdl@163.com>
+about: Output the first part of files.
+args:
+    - FILE:
+        multiple: true
+        help: "Print the first 10 lines of each FILE to standard outpu\nWith more than one FILE, precede each with a header giving the file name\nWith no FILE, or when FILE is -, read standard input"
+    - quiet:
+        short: q
+        long: quiet
+        help: Never print headers giving file names
+    - verbose:
+        short: v
+        long: verbose
+        help: Always print headers giving file names
+        conflicts_with: quiet
+    - zero-terminated:
+        short: z
+        long: zero-terminated
+        help: Line delimiter is NUL, not newline

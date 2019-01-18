@@ -6,7 +6,7 @@ after_help: "EXAMPLES:\n    cat f - g  Output f's contents, then standard input,
 args:
     - FILE:
         multiple: true
-        help: The file to concatenate. With no FILE, or when FILE is -, read standard input.
+        help: With no FILE, or when FILE is -, read standard input
     - number:
         short: n
         long: number
@@ -15,6 +15,7 @@ args:
         short: b
         long: number-nonblank
         help: Number nonempty output lines, overrides -n
+        overrides_with: number
     - show-ends:
         short: E
         long: show-ends
